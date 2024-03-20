@@ -1,93 +1,67 @@
-<a href="https://demo-nextjs-with-supabase.vercel.app/">
-  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://demo-nextjs-with-supabase.vercel.app/opengraph-image.png">
-  <h1 align="center">Next.js and Supabase Starter Kit</h1>
-</a>
+# Scripture Memory
 
-<p align="center">
- The fastest way to build apps with Next.js and Supabase
-</p>
+Scripture Memory is a Typescript project utilizing Supabase for DB and Auth, paired with Vercel's Frontend Cloud for hosting the Next.js app resource.
 
-<p align="center">
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Demo</strong></a> ·
-  <a href="#deploy-to-vercel"><strong>Deploy to Vercel</strong></a> ·
-  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
-  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
-  <a href="#more-supabase-examples"><strong>More Examples</strong></a>
-</p>
-<br/>
+- [Tech Stack](#tech-stack)
+- [Packages](#packages)
+- [Local Environment](#local-environment)
+- [Dependencies](#dependencies)
+- [Setup](#setup)
+- [Teardown](#teardown)
+- [Linting](#linting)
+- [Testing](#testing)
+- [Unit Testing](#unit-testing)
+- [Automated End-to-End (E2E) Testing](#automated-end-to-end-e2e-testing)
 
-## Features
+## Tech Stack
 
-- Works across the entire [Next.js](https://nextjs.org) stack
-  - App Router
-  - Pages Router
-  - Middleware
-  - Client
-  - Server
-  - It just works!
-- supabase-ssr. A package to configure Supabase Auth to use cookies
-- Styling with [Tailwind CSS](https://tailwindcss.com)
-- Optional deployment with [Supabase Vercel Integration and Vercel deploy](#deploy-your-own)
-  - Environment variables automatically assigned to Vercel project
+- [Next.js](https://nextjs.org/docs/getting-started/installation)
+- [Supabase](https://supabase.com/docs/guides/getting-started/quickstarts/nextjs)
+- [Vercel](https://vercel.com/docs/getting-started-with-vercel)
 
-## Demo
+## Packages
 
-You can view a fully working demo at [demo-nextjs-with-supabase.vercel.app](https://demo-nextjs-with-supabase.vercel.app/).
+- [Headless UI](https://github.com/tailwindlabs/headlessui?tab=readme-ov-file): "Completely unstyled, fully accessible UI components, designed to integrate with Tailwind CSS."
+- [heroicons](https://github.com/tailwindlabs/heroicons?tab=readme-ov-file): "Free, MIT-licensed, high-quality SVG icons, by the makers of Tailwind CSS."
+- [Framer-Motion](https://www.framer.com/motion/introduction/): "Simple, yet powerful, motion library for React."
+- [React-Hook-Form](https://react-hook-form.com/get-started): "Performant, flexible and extensible forms for React with easy-to-use validation."
+- [TailwindCSS](https://tailwindcss.com/docs/installation): "Utility-first CSS framework...that can be composed directly in your markup."
+- [Typescript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html): "JavaScript with syntax for types; a strongly typed programming language that builds on JavaScript."
+- [zod](https://zod.dev/?id=introduction): "TypeScript-first schema declaration and validation library."
 
-## Deploy to Vercel
+## Local Environment
 
-Vercel deployment will guide you through creating a Supabase account and project.
+### Dependencies
 
-After installation of the Supabase integration, all relevant environment variables will be assigned to the project so the deployment is fully functioning.
+- Node v20.11.0
+- Npx v10.2.4
+- Docker v.24.0.7
+- VS Code IDE
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&demo-title=nextjs-with-supabase&demo-description=This%20starter%20configures%20Supabase%20Auth%20to%20use%20cookies%2C%20making%20the%20user's%20session%20available%20throughout%20the%20entire%20Next.js%20app%20-%20Client%20Components%2C%20Server%20Components%2C%20Route%20Handlers%2C%20Server%20Actions%20and%20Middleware.&demo-url=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2F&external-id=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&demo-image=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2Fopengraph-image.png&integration-ids=oac_VqOgBHqhEoFTPzGkPd7L0iH6)
+### Setup
 
-The above will also clone the Starter kit to your GitHub, you can clone that locally and develop locally.
+1. Clone Repo
+2. Duplicate `.env.example` and rename to `.env.local`
+3. Run command `npx supabase init`
+4. Run command `npx supabase start`
+5. From output on step 4, provide the anon_key and api url for `NEXT_PUBLIC_SUPABASE_ANON_KEY` and `NEXT_PUBLIC_SUPABASE_URL` located in `.env.local`.
+6. Run command `npm run dev`
 
-If you wish to just develop locally and not deploy to Vercel, [follow the steps below](#clone-and-run-locally).
+### Teardown
 
-## Clone and run locally
+- Stop local Supabase DB to prevent machine usage with `npx supabase stop`
+- Stop JS server with `Ctrl-C` > `Y` on Node terminal
 
-1. You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
+## Linting
 
-2. Create a Next.js app using the Supabase Starter template npx command
+Code analysis configured using the [ESLint](https://nextjs.org/docs/pages/building-your-application/configuring/eslint) linting utility. Run linting analysis with `npm run lint`.
 
-   ```bash
-   npx create-next-app -e with-supabase
-   ```
+## Testing
 
-3. Use `cd` to change into the app's directory
+### Unit Testing
 
-   ```bash
-   cd name-of-new-app
-   ```
+Unit tests built using the [Vitest](https://nextjs.org/docs/app/building-your-application/testing/vitest) testing framework. Set up Vitest by running `npm install -D vitest`. Run test files with `npm run test`.
 
-4. Rename `.env.local.example` to `.env.local` and update the following:
+### Automated End-to-End (E2E) Testing
 
-   ```
-   NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=[INSERT SUPABASE PROJECT API ANON KEY]
-   ```
-
-   Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` can be found in [your Supabase project's API settings](https://app.supabase.com/project/_/settings/api)
-
-5. You can now run the Next.js local development server:
-
-   ```bash
-   npm run dev
-   ```
-
-   The starter kit should now be running on [localhost:3000](http://localhost:3000/).
-
-> Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
-
-## Feedback and issues
-
-Please file feedback and issues over on the [Supabase GitHub org](https://github.com/supabase/supabase/issues/new/choose).
-
-## More Supabase examples
-
-- [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
-- [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
-- [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
+Automated E2E tests built using the [Playwright](https://nextjs.org/docs/app/building-your-application/testing/playwright) testing framework. Setup Playwright by running `npm run playwright:install`. Run automated tests with `npm run playwright`.

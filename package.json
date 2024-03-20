@@ -3,24 +3,37 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "lint": "next lint",
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.18",
+    "@headlessui/tailwindcss": "^0.2.0",
+    "@heroicons/react": "^2.1.1",
+    "@hookform/resolvers": "^3.3.4",
     "@supabase/ssr": "latest",
     "@supabase/supabase-js": "latest",
     "autoprefixer": "10.4.17",
+    "framer-motion": "^11.0.15",
     "geist": "^1.2.1",
     "next": "latest",
     "postcss": "8.4.33",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwindcss": "3.4.1",
-    "typescript": "5.3.3"
+    "typescript": "5.3.3",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/node": "20.11.5",
-    "@types/react": "18.2.48",
-    "@types/react-dom": "18.2.18",
-    "encoding": "^0.1.13"
+    "@types/node": "20.3.1",
+    "@types/react": "18.2.8",
+    "@types/react-dom": "18.2.5",
+    "encoding": "^0.1.13",
+    "eslint": "8.56.0",
+    "eslint-config-next": "14.0.4",
+    "eslint-config-prettier": "^9.1.0",
+    "playwright": "^1.40.1",
+    "prettier": "^3.2.1",
+    "vitest": "^1.2.0"
   }
 }
