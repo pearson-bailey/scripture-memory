@@ -13,7 +13,7 @@ export default function LogoButton() {
         alt="Scripture Memory Logo"
         className="w-12 h-12"
       />
-      <span className="font-bold text-2xl">Scripture Memory</span>
+      <span className="font-bold text-2xl text-teal-400">Scripture Memory</span>
     </Link>
   );
 }
