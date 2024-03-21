@@ -1,7 +1,7 @@
 "use server";
 export default async function fetchNLT(reference: string | undefined) {
   try {
-    const url = `https://api.nlt.to/api/passages?version=nlt&ref=${reference}&key=TEST`;
+    const url = `https://api.nlt.to/api/passages?version=nlt&ref=${reference}&key=${process.env.NLT_API_KEY}`;
 
     const response = await fetch(url);
     if (!response.ok) {
