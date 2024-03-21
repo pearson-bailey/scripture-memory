@@ -1,12 +1,13 @@
 "use client";
-import { useState, Fragment, useEffect } from "react";
+import { useState, Fragment, useEffect, SetStateAction } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import {
   ArrowRightEndOnRectangleIcon,
   ArrowRightStartOnRectangleIcon,
   Bars3Icon,
+  BookOpenIcon,
   ChartBarIcon,
-  PlayIcon,
+  MagnifyingGlassIcon,
   Square3Stack3DIcon,
   UserGroupIcon,
   UserIcon,
@@ -17,13 +18,13 @@ import { usePathname } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
 
-const defaultIconStyles = "h-6 w-6 fill-teal-400";
+const defaultIconStyles = "h-6 w-6 fill-teal-500";
 const pages = [
   {
     id: 1,
-    href: "/memorize",
-    icon: <PlayIcon className={defaultIconStyles} />,
-    name: "Memorize",
+    href: "/verses",
+    icon: <BookOpenIcon className={defaultIconStyles} />,
+    name: "Verses",
   },
   {
     id: 2,
@@ -51,7 +52,11 @@ const pages = [
   },
 ];
 
-export default function HeaderNav() {
+export default function HeaderNav({
+  handleSearch,
+}: {
+  handleSearch: () => void;
+}) {
   const currentPath = usePathname();
   const [selected, setSelected] = useState<string>(currentPath);
   const [user, setUser] = useState<User | null>(null);
@@ -75,6 +80,9 @@ export default function HeaderNav() {
   return (
     <Listbox value={selected} onChange={setSelected}>
       <div className="relative flex items-center justify-end w-36">
+        <button onClick={handleSearch}>
+          <MagnifyingGlassIcon className="w-7 h-7" />
+        </button>
         <Listbox.Button className="relative flex cursor-pointer rounded-md py-2 px-4 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
           <Bars3Icon
             className="h-7 w-7 text-gray-300 hover:text-gray-200"

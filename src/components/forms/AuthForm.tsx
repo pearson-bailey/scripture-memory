@@ -21,7 +21,7 @@ export default function AuthForm() {
 
   useEffect(() => {
     if (state?.success === true || user !== null) {
-      push("/memorize");
+      push("/verses");
     }
   }, [push, state, user]);
 
@@ -67,7 +67,7 @@ export default function AuthForm() {
         {state?.success === false && (
           <ErrorMessage>{state.message}</ErrorMessage>
         )}
-        <button className="bg-teal-400 rounded-md px-4 py-2 text-black font-bold mb-2 hover:bg-teal-500">
+        <button className="bg-teal-500 rounded-md px-4 py-2 text-black font-bold mb-2 hover:bg-teal-600">
           Sign In
         </button>
         <Link

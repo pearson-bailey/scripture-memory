@@ -49,7 +49,7 @@ export default function RegisterForm({
           <ErrorMessage>{errors.full_name.message}</ErrorMessage>
         )}
         <input
-          className="rounded-md px-4 py-2 border mb-3 text-black bg-gray-200"
+          className="rounded-md px-4 py-2 border mb-3 text-black"
           type="text"
           {...register("full_name")}
           placeholder="Your first and last name"
@@ -60,7 +60,7 @@ export default function RegisterForm({
         </label>
         {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         <input
-          className="rounded-md px-4 py-2 border mb-3 text-black bg-gray-200"
+          className="rounded-md px-4 py-2 border mb-3 text-black"
           type="email"
           {...register("email")}
           placeholder="email@address.com"
@@ -71,7 +71,7 @@ export default function RegisterForm({
         </label>
         {errors.password && <PasswordError password={passwordValue} />}
         <input
-          className="rounded-md px-4 py-2 border mb-3 text-black bg-gray-200"
+          className="rounded-md px-4 py-2 border mb-3 text-black"
           type="password"
           {...register("password")}
           placeholder="••••••••"
@@ -81,7 +81,7 @@ export default function RegisterForm({
           <span className="text-red-700 text-xl leading-3 ml-1">*</span>
         </label>
         <input
-          className="rounded-md px-4 py-2 border mb-3 text-black bg-gray-200"
+          className="rounded-md px-4 py-2 border mb-3 text-black"
           type="password"
           placeholder="••••••••"
           {...register("confirm_password")}
@@ -95,7 +95,7 @@ export default function RegisterForm({
         {state?.success === true && (
           <SuccessMessage className="flex flex-col">
             <span>Success! Check your email to complete registration</span>
-            <Link className="text-teal-400 underline" href="/">
+            <Link className="text-teal-500 underline" href="/">
               Return to homepage
             </Link>
           </SuccessMessage>
@@ -110,26 +110,18 @@ export default function RegisterForm({
           />
           <label htmlFor="optIn">
             I agree to the{" "}
-            <a
-              href={termsUrl}
-              download
-              className="text-indigo-700 font-bold hover:underline"
-            >
+            <a href={termsUrl} download className="font-bold underline">
               Terms of Service
             </a>{" "}
             and{" "}
-            <a
-              href={privacyUrl}
-              download
-              className="text-indigo-700 font-bold hover:underline"
-            >
+            <a href={privacyUrl} download className="font-bold underline">
               Privacy Policy
             </a>
             .<span className="text-red-700 text-xl leading-3 ml-1">*</span>
           </label>
         </div>
       </fieldset>
-      <button className="bg-teal-400 rounded-md px-4 py-2 text-black font-bold hover:bg-teal-500">
+      <button className="bg-teal-500 rounded-md px-4 py-2 text-black font-bold hover:bg-teal-600">
         Sign Up
       </button>
     </form>
