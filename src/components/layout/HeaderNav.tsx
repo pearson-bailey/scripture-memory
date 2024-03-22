@@ -94,7 +94,7 @@ export default function HeaderNav({
                         : null
                     }`
                   }
-                  disabled={selected.includes(page.href)}
+                  disabled={selected?.includes(page.href)}
                   value={page}
                 >
                   <Link href={page.href}>

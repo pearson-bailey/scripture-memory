@@ -1,8 +1,7 @@
-import { Verse } from "@/src/app/practice/actions";
 import { PlayIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
-export default function VerseCard({ verse }: { verse: Verse | null }) {
+export default function VerseCard({ verse }: { verse: any | null }) {
   return (
     <div className="flex bg-foreground rounded-md">
       <div className="flex w-full flex-col gap-3 p-4 bg-background/90">

@@ -1,13 +1,13 @@
 "use server";
 import { VerseCard } from "@/src/components/verses";
-import { Verse, getVerse } from "./actions";
+import { getVerse } from "./actions";
 
 export default async function Verses({
   searchParams,
 }: {
   searchParams: { id: string };
 }) {
-  const verse: Verse = await getVerse(searchParams.id);
+  const verse = await getVerse(searchParams.id);
 
   return (
     <div className="flex flex-col mt-4 gap-2">

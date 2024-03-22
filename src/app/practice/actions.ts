@@ -2,14 +2,11 @@
 import { createClient } from "@/utils/supabase/server";
 import { QueryData } from "@supabase/supabase-js";
 
-const supabase = createClient();
-
-const verseQuery = supabase.from("verses").select("*").single();
-
-export type Verse = QueryData<typeof verseQuery>;
-
-export async function getVerse(id: string): Promise<Verse> {
+export async function getVerse(id: string) {
   const supabase = createClient();
+
+  const verseQuery = supabase.from("verses").select("*").single();
+  type Verse = QueryData<typeof verseQuery>;
   const { data, error } = await supabase
     .from("verses")
     .select("*")
@@ -20,5 +17,5 @@ export async function getVerse(id: string): Promise<Verse> {
     throw error;
   }
 
-  return data;
+  return data as Verse;
 }

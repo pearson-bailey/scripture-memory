@@ -2,25 +2,15 @@
 import { createClient } from "@/utils/supabase/server";
 import { QueryData } from "@supabase/supabase-js";
 
-const supabase = createClient();
-
-const userVersesQuery = supabase.from("user_verses").select("*, verses(*)");
-export type UserVerses = QueryData<typeof userVersesQuery>;
-
-export async function getUserVerses(): Promise<UserVerses> {
+export async function getUserVerses() {
   const supabase = createClient();
+  const userVersesQuery = supabase.from("user_verses").select("*, verses(*)");
+  type UserVerses = QueryData<typeof userVersesQuery>;
   const { data, error } = await userVersesQuery;
 
   if (error) {
     throw error;
   }
 
-  return data;
+  return data as UserVerses;
 }
-
-const userVerseQuery = supabase
-  .from("user_verses")
-  .select("*, verses(*)")
-  .single();
-
-export type UserVerse = QueryData<typeof userVerseQuery>;

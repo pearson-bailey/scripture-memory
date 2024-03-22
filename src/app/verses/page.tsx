@@ -1,9 +1,9 @@
 "use server";
 import { VerseCard } from "@/src/components/verses";
-import { UserVerses, getUserVerses } from "./actions";
+import { getUserVerses } from "./actions";
 
 export default async function Verses() {
-  const verses: UserVerses = await getUserVerses();
+  const verses = await getUserVerses();
 
   return (
     <div className="flex flex-col mt-4 gap-2">
