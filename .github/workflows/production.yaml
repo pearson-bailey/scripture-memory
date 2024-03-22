@@ -22,5 +22,13 @@ jobs:
         with:
           version: latest
 
+      - name: Check SUPABASE_PROJECT_ID Environment Variable
+        run: |
+          if [ -z "$SUPABASE_PROJECT_ID" ]; then
+            echo "SUPABASE_PROJECT_ID is empty"
+          else
+            echo "SUPABASE_PROJECT_ID is set"
+          fi
+
       - run: supabase link --project-ref $SUPABASE_PROJECT_ID
       - run: supabase db push
