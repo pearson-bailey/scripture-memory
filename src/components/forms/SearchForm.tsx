@@ -5,6 +5,7 @@ import { bibleVersions, booksOfBible } from "@/src/constants";
 import { useCallback, useState } from "react";
 import { BotB, Version } from "@/src/types";
 import { selectAbbrev } from "@/utils/client";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 export default function RegisterForm({
   submitForm,
@@ -95,8 +96,9 @@ export default function RegisterForm({
         />
         <button
           type="submit"
-          className="bg-teal-500 rounded-md px-3 py-1.5 text-black font-bold hover:bg-teal-600"
+          className="flex items-center gap-1 bg-teal-500 rounded-md px-3 py-1.5 text-white hover:bg-teal-600"
         >
+          <MagnifyingGlassIcon className="h-4 w-4" />
           Search
         </button>
       </div>
