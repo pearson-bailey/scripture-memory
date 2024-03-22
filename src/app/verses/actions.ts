@@ -8,6 +8,7 @@ const userVersesQuery = supabase.from("user_verses").select("*, verses(*)");
 export type UserVerses = QueryData<typeof userVersesQuery>;
 
 export async function getUserVerses(): Promise<UserVerses> {
+  const supabase = createClient();
   const { data, error } = await userVersesQuery;
 
   if (error) {
