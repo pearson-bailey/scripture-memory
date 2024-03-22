@@ -1,8 +1,9 @@
 "use client";
-import { ReactNode, useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { fetchESV, fetchKJV, fetchNLT } from "@/utils/server";
 import { formatKJV, formatNLT } from "@/utils/client";
 import SearchForm from "./forms/SearchForm";
+import { Verse } from "../types";
 
 export default function SearchResults({
   text,
@@ -11,7 +12,7 @@ export default function SearchResults({
   text: string;
   version: string;
 }) {
-  const [result, setResult] = useState<string | ReactNode | null>(null);
+  const [result, setResult] = useState<Verse | null>(null);
 
   const submitForm = useCallback(
     async (requestString: string, versionAbbrev: string) => {
@@ -32,20 +33,27 @@ export default function SearchResults({
           console.error("Unsupported version:", versionAbbrev);
       }
 
-      if (response !== null) setResult(response);
+      if (response !== null && response !== undefined)
+        setResult({
+          reference: requestString,
+          text: response,
+          version: versionAbbrev,
+        });
     },
     []
   );
 
+  useEffect(() => {
+    if (text && version) {
+      submitForm(text, version);
+    }
+  }, []);
+
   return (
     <div className="flex flex-col gap-2">
-      <SearchForm
-        submitForm={submitForm}
-        textParam={text}
-        versionParam={version}
-      />
+      <SearchForm submitForm={submitForm} />
       <span className="font-bold text-2xl text-teal-500">
-        {result ? <span>{result}</span> : null}
+        {result ? <span>{result.text}</span> : null}
       </span>
     </div>
   );

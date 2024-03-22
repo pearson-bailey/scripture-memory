@@ -2,29 +2,20 @@
 import { Combobox } from "@/src/components/ui";
 import { RegisterForm } from "./types";
 import { bibleVersions, booksOfBible } from "@/src/constants";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { BotB, Version } from "@/src/types";
+import { selectAbbrev } from "@/utils/client";
 
 export default function RegisterForm({
   submitForm,
-  textParam,
-  versionParam,
 }: {
   submitForm: (requestString: string, version: string) => void;
-  textParam?: string | null;
-  versionParam?: string | null;
 }) {
   const [version, setVersion] = useState<Version>(bibleVersions[0]);
   const [book, setBook] = useState<BotB>(booksOfBible[0]);
   const [chapter, setChapter] = useState<number>(1);
   const [verseStart, setVerseStart] = useState<number>(1);
   const [verseEnd, setVerseEnd] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (textParam && versionParam) {
-      submitForm(textParam, versionParam);
-    }
-  }, [textParam, versionParam]);
 
   const handleChapter = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,7 +41,12 @@ export default function RegisterForm({
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      const requestString = `${book.abbrev}.${chapter}.${verseStart}${verseEnd ? `-${verseEnd}` : ""}`;
+      const abbrev = selectAbbrev({
+        book: book?.abbrev,
+        version: version?.abbrev,
+      });
+
+      const requestString = `${abbrev}.${chapter}.${verseStart}${verseEnd ? `-${verseEnd}` : ""}`;
 
       submitForm(requestString, version.abbrev);
     },

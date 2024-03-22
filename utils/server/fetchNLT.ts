@@ -7,8 +7,9 @@ export default async function fetchNLT(reference: string | undefined) {
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
+    const data = await response.text();
 
-    return await response.text();
+    return data ? data : "Error: Passage not found";
   } catch (error) {
     console.error("Error fetching data:", error);
   }
