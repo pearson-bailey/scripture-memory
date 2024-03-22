@@ -1,5 +1,5 @@
 "use client";
-import { useState, Fragment, useEffect, SetStateAction } from "react";
+import { useState, Fragment, useEffect } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import {
   ArrowRightEndOnRectangleIcon,
@@ -15,8 +15,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { createClient } from "@/utils/supabase/client";
-import { User } from "@supabase/supabase-js";
+import { useCurrentUser } from "../UserContext";
 
 const defaultIconStyles = "h-6 w-6 fill-teal-500";
 const pages = [
@@ -59,19 +58,7 @@ export default function HeaderNav({
 }) {
   const currentPath = usePathname();
   const [selected, setSelected] = useState<string>(currentPath);
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    const supabase = createClient();
-    const getUserAsync = async () => {
-      const { data } = await supabase.auth.getSession();
-      if (data?.session?.user) {
-        setUser(data.session.user);
-      }
-    };
-
-    getUserAsync();
-  }, []);
+  const user = useCurrentUser();
 
   useEffect(() => {
     setSelected(currentPath);
@@ -95,7 +82,7 @@ export default function HeaderNav({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          {user != null ? (
+          {user !== null ? (
             <Listbox.Options className="absolute z-10 top-12 mt-1 max-h-64 w-full text-indigo-900 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
               {pages.map((page, pageIdx) => (
                 <Listbox.Option

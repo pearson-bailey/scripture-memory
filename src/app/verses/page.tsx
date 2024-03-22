@@ -1,31 +1,31 @@
 "use server";
-import { createClient } from "@/utils/supabase/server";
+import { VerseCard } from "@/src/components/verses";
+import { UserVerses, getUserVerses } from "./actions";
 
 export default async function Verses() {
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from("user_verses")
-    .select("*, verses(*)");
+  const verses: UserVerses = await getUserVerses();
+
   return (
-    <div className="flex flex-col mt-4 gap-4">
+    <div className="flex flex-col mt-4 gap-2">
       <h1 className="w-full text-center text-4xl text-teal-500 mb-4">
         My Verses
       </h1>
-      {data ? (
-        data.map((verse) => (
-          <div
-            key={verse.id}
-            className="flex flex-col gap-2 p-4 bg-indigo-950 rounded-md"
-          >
-            <p className="text-xl">
-              {verse.verses?.reference}, {verse.verses?.version}
-            </p>
-            <p className="text-lg">{verse.verses?.text}</p>
-          </div>
-        ))
-      ) : (
-        <p>{error.message ?? "No verses"}</p>
-      )}
+      <div className="grid grid-cols-4 gap-4">
+        <div className="w-full h-full bg-teal-500 rounded-md max-h-[80vh]">
+          <h2 className="w-full text-center text-2xl text-black my-2">
+            My Sets
+          </h2>
+        </div>
+        <div className="flex flex-col col-span-3 gap-4">
+          {verses ? (
+            verses.map((verse) => (
+              <VerseCard key={verse.id} verse={verse.verses} />
+            ))
+          ) : (
+            <p>{"No verses"}</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
