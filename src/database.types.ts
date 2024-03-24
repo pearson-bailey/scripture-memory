@@ -34,33 +34,98 @@ export type Database = {
   };
   public: {
     Tables: {
+      profiles: {
+        Row: {
+          full_name: string | null;
+          id: string;
+          updated_at: string | null;
+          username: string | null;
+        };
+        Insert: {
+          full_name?: string | null;
+          id: string;
+          updated_at?: string | null;
+          username?: string | null;
+        };
+        Update: {
+          full_name?: string | null;
+          id?: string;
+          updated_at?: string | null;
+          username?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "profiles_id_fkey";
+            columns: ["id"];
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      sets: {
+        Row: {
+          created_at: string;
+          created_by: string | null;
+          id: string;
+          likes: number;
+          public: boolean;
+        };
+        Insert: {
+          created_at?: string;
+          created_by?: string | null;
+          id?: string;
+          likes?: number;
+          public?: boolean;
+        };
+        Update: {
+          created_at?: string;
+          created_by?: string | null;
+          id?: string;
+          likes?: number;
+          public?: boolean;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "public_sets_created_by_fkey";
+            columns: ["created_by"];
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       user_verses: {
         Row: {
           created_at: string;
           id: string;
           set_id: string | null;
-          user_id: string;
+          user_id: string | null;
           verse_id: string;
         };
         Insert: {
           created_at?: string;
           id?: string;
           set_id?: string | null;
-          user_id: string;
+          user_id?: string | null;
           verse_id: string;
         };
         Update: {
           created_at?: string;
           id?: string;
           set_id?: string | null;
-          user_id?: string;
+          user_id?: string | null;
           verse_id?: string;
         };
         Relationships: [
           {
+            foreignKeyName: "public_user_verses_set_id_fkey";
+            columns: ["set_id"];
+            referencedRelation: "sets";
+            referencedColumns: ["id"];
+          },
+          {
             foreignKeyName: "public_user_verses_user_id_fkey";
             columns: ["user_id"];
-            referencedRelation: "users";
+            referencedRelation: "profiles";
             referencedColumns: ["id"];
           },
           {
@@ -103,7 +168,7 @@ export type Database = {
           {
             foreignKeyName: "public_verses_edited_by_fkey";
             columns: ["edited_by"];
-            referencedRelation: "users";
+            referencedRelation: "profiles";
             referencedColumns: ["id"];
           },
         ];

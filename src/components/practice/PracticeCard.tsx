@@ -1,5 +1,6 @@
 "use client";
 import { Tables } from "@/src/database.types";
+import { formatRef } from "@/utils/client/parseRef";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect, useCallback } from "react";
 
@@ -19,6 +20,7 @@ export default function PracticeCard({
   verse: Tables<"verses"> | null;
 }) {
   const { push } = useRouter();
+  const [formattedRef, setFormattedRef] = useState<string | null>(null);
   const [randomIndexes, setRandomIndexes] = useState<number[]>([]);
   const [userInputs, setUserInputs] = useState<{ [key: number]: UserInput }>(
     {}
@@ -27,6 +29,13 @@ export default function PracticeCard({
     Array<JSX.Element | string>
   >([]);
   const [feedback, setFeedback] = useState<Feedback>();
+
+  useEffect(() => {
+    if (verse?.reference && verse?.version) {
+      const refString = formatRef(verse?.reference, verse?.version);
+      setFormattedRef(refString);
+    }
+  }, [setFormattedRef, verse]);
 
   const generateRandomIndexes = useCallback((length: number): number[] => {
     const half = Math.ceil(length / 2);
@@ -141,7 +150,7 @@ export default function PracticeCard({
     <div className="flex bg-foreground rounded-md">
       <div className="flex w-full flex-col gap-3 p-4 bg-background/90">
         <div className="text-xl">
-          {verse?.reference}, {verse?.version}
+          {formattedRef ?? verse?.reference}, {verse?.version}
         </div>
         <div className="flex flex-wrap gap-1 text-lg">"{modifiedVerse}"</div>
         {feedback?.message && (

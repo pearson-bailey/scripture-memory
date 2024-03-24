@@ -7,10 +7,10 @@ import {
   Bars3Icon,
   BookOpenIcon,
   ChartBarIcon,
+  Cog6ToothIcon,
   MagnifyingGlassIcon,
   Square3Stack3DIcon,
   UserGroupIcon,
-  UserIcon,
   UserPlusIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
@@ -45,9 +45,9 @@ const pages = [
   },
   {
     id: 5,
-    href: "/account",
-    icon: <UserIcon className={defaultIconStyles} />,
-    name: "Account",
+    href: "/settings",
+    icon: <Cog6ToothIcon className={defaultIconStyles} />,
+    name: "Settings",
   },
 ];
 

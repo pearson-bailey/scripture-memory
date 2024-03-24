@@ -1,22 +1,48 @@
 "use client";
 import { Combobox } from "@/src/components/ui";
-import { RegisterForm } from "./types";
 import { bibleVersions, booksOfBible } from "@/src/constants";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { BotB, Version } from "@/src/types";
 import { selectAbbrev } from "@/utils/client";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import {
+  getBook,
+  getChapter,
+  getEndVerse,
+  getStartVerse,
+} from "@/utils/client/parseRef";
 
-export default function RegisterForm({
+export default function SearchForm({
+  refParam,
   submitForm,
+  versionParam,
 }: {
+  refParam?: string;
   submitForm: (requestString: string, version: string) => void;
+  versionParam?: string;
 }) {
   const [version, setVersion] = useState<Version>(bibleVersions[0]);
   const [book, setBook] = useState<BotB>(booksOfBible[0]);
   const [chapter, setChapter] = useState<number>(1);
   const [verseStart, setVerseStart] = useState<number>(1);
   const [verseEnd, setVerseEnd] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (refParam && versionParam) {
+      const versionFromParam = bibleVersions.find(
+        (v) => v.abbrev === versionParam
+      );
+      setVersion(versionFromParam ?? bibleVersions[0]);
+      const bookFromParam = getBook(refParam, versionParam);
+      setBook(bookFromParam ?? booksOfBible[0]);
+      const chapterFromParam = getChapter(refParam);
+      setChapter(chapterFromParam ?? 1);
+      const verseStartFromParam = getStartVerse(refParam);
+      setVerseStart(verseStartFromParam ?? 1);
+      const verseEndFromParam = getEndVerse(refParam);
+      setVerseEnd(verseEndFromParam ?? null);
+    }
+  }, [refParam, versionParam]);
 
   const handleChapter = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,7 +94,7 @@ export default function RegisterForm({
           min="1"
           max="150"
           onChange={handleChapter}
-          defaultValue="1"
+          defaultValue={chapter?.toString() ?? ""}
         />
         <strong>:</strong>
         <input
@@ -77,7 +103,7 @@ export default function RegisterForm({
           min="1"
           max="176"
           onChange={handleVerseStart}
-          defaultValue="1"
+          defaultValue={verseStart?.toString() ?? ""}
         />
         <strong>{" - "}</strong>
         <input
@@ -86,6 +112,7 @@ export default function RegisterForm({
           min="1"
           max="176"
           onChange={handleVerseEnd}
+          defaultValue={verseEnd?.toString() ?? ""}
         />
       </div>
       <div className="flex items-center justify-center gap-2">
