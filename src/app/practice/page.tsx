@@ -1,5 +1,5 @@
 "use server";
-import { VerseCard } from "@/src/components/verses";
+import { PracticeCard } from "@/src/components/practice";
 import { getVerse } from "./actions";
 
 export default async function Verses({
@@ -16,7 +16,7 @@ export default async function Verses({
       </h1>
       <div className="flex flex-col gap-4">
         {verse ? (
-          <VerseCard verse={verse} />
+          <PracticeCard verse={verse} />
         ) : (
           <p>{"Verse could not be found"}</p>
         )}
