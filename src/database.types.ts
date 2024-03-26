@@ -100,31 +100,22 @@ export type Database = {
         Row: {
           created_at: string;
           id: string;
-          set_id: string | null;
           user_id: string | null;
           verse_id: string;
         };
         Insert: {
           created_at?: string;
           id?: string;
-          set_id?: string | null;
           user_id?: string | null;
           verse_id: string;
         };
         Update: {
           created_at?: string;
           id?: string;
-          set_id?: string | null;
           user_id?: string | null;
           verse_id?: string;
         };
         Relationships: [
-          {
-            foreignKeyName: "public_user_verses_set_id_fkey";
-            columns: ["set_id"];
-            referencedRelation: "sets";
-            referencedColumns: ["id"];
-          },
           {
             foreignKeyName: "public_user_verses_user_id_fkey";
             columns: ["user_id"];
@@ -135,6 +126,46 @@ export type Database = {
             foreignKeyName: "public_user_verses_verse_id_fkey";
             columns: ["verse_id"];
             referencedRelation: "verses";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      user_verses_sets: {
+        Row: {
+          id: string;
+          set_id: string | null;
+          user_id: string | null;
+          user_verse_id: string | null;
+        };
+        Insert: {
+          id?: string;
+          set_id?: string | null;
+          user_id?: string | null;
+          user_verse_id?: string | null;
+        };
+        Update: {
+          id?: string;
+          set_id?: string | null;
+          user_id?: string | null;
+          user_verse_id?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "public_user_verses_sets_set_id_fkey";
+            columns: ["set_id"];
+            referencedRelation: "sets";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "public_user_verses_sets_user_id_fkey";
+            columns: ["user_id"];
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "public_user_verses_sets_user_verse_id_fkey";
+            columns: ["user_verse_id"];
+            referencedRelation: "user_verses";
             referencedColumns: ["id"];
           },
         ];

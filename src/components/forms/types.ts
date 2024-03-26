@@ -34,6 +34,15 @@ export const signInForm = z.object({
 export type SignInForm = z.infer<typeof signInForm>;
 export const signInFormResolver = zodResolver(signInForm);
 
+export const updateSetForm = z.object({
+  id: z.string().min(1, "ID is required"),
+  public: z.preprocess((value) => value === "on", z.boolean()),
+  title: z.string().min(1, "Title is required").max(50),
+  verses: z.array(z.string()).optional(),
+});
+export type UpdateSetForm = z.infer<typeof updateSetForm>;
+export const updateSetFormResolver = zodResolver(updateSetForm);
+
 interface SuccessResponse {
   message?: string | null;
   success: true;

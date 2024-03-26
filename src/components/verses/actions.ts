@@ -14,3 +14,18 @@ export async function getUserVerses() {
 
   return data as UserVerses;
 }
+
+export async function getUserVersesWithSet() {
+  const supabase = createClient();
+  const userVersesQuery = supabase
+    .from("user_verses")
+    .select("*, user_verses_sets(set_id), verses(*)");
+  type UserVerses = QueryData<typeof userVersesQuery>;
+  const { data, error } = await userVersesQuery;
+
+  if (error) {
+    throw error;
+  }
+
+  return data as UserVerses;
+}

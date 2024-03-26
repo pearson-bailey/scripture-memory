@@ -11,7 +11,7 @@ export async function getUserSets() {
 
   const userSetsQuery = supabase
     .from("sets")
-    .select("*, user_verses(*, verses(*))")
+    .select("*, user_verses_sets(*, user_verses(*, verses(*)))")
     .eq("created_by", userData?.user?.id ?? "");
   type UserSets = QueryData<typeof userSetsQuery>;
   const { data, error } = await userSetsQuery;

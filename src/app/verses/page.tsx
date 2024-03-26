@@ -1,6 +1,6 @@
 "use server";
 import { VerseCard } from "@/src/components/verses";
-import { getUserVerses } from "./actions";
+import { getUserVerses } from "../../components/verses/actions";
 
 export default async function Verses() {
   const verses = await getUserVerses();

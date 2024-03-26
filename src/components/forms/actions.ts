@@ -5,8 +5,10 @@ import {
   createSetForm,
   registerForm,
   signInForm,
+  updateSetForm,
 } from "./types";
 import { createClient } from "@/utils/supabase/server";
+import { Tables } from "@/src/database.types";
 
 export async function createSet(
   _: FormSubmissionResponse | null,
@@ -44,6 +46,22 @@ export async function createSet(
 
   revalidatePath("/", "layout");
   return { success: true };
+}
+
+export async function getSet(id: string): Promise<Tables<"sets">> {
+  const supabase = createClient();
+
+  const { data: setData, error: setError } = await supabase
+    .from("sets")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (setError) {
+    throw setError;
+  }
+
+  return setData;
 }
 
 export async function signIn(
@@ -111,5 +129,83 @@ export async function signUp(
     };
   }
 
+  return { success: true };
+}
+
+export async function updateSet(
+  _: FormSubmissionResponse | null,
+  formData: unknown
+): Promise<FormSubmissionResponse> {
+  const supabase = createClient();
+
+  const parsed = updateSetForm.safeParse(formData);
+  if (!parsed.success) {
+    return {
+      success: false,
+      message: parsed.error.message,
+    };
+  }
+
+  const form = parsed.data;
+
+  const { error } = await supabase
+    .from("sets")
+    .update({
+      title: form.title,
+      public: form.public,
+    })
+    .eq("id", form.id);
+
+  if (error) {
+    return {
+      success: false,
+      message: error.message,
+    };
+  }
+
+  const { data: setVerses, error: setVersesError } = await supabase
+    .from("user_verses_sets")
+    .select("id, user_verse_id")
+    .eq("set_id", form.id);
+
+  if (setVersesError) {
+    return {
+      success: false,
+      message: setVersesError.message,
+    };
+  }
+
+  const versesToRemove = setVerses?.filter(
+    (uv) => !form.verses?.includes(uv.user_verse_id ?? "")
+  );
+
+  for (const verse of versesToRemove) {
+    const { error } = await supabase
+      .from("user_verses_sets")
+      .delete()
+      .eq("id", verse.id);
+
+    if (error) return { success: false, message: error.message };
+  }
+
+  const versesToAdd = form.verses?.filter(
+    (fv) => !setVerses?.some((uv) => uv.user_verse_id === fv)
+  );
+
+  if (versesToAdd) {
+    for (const verse of versesToAdd) {
+      const { error } = await supabase
+        .from("user_verses_sets")
+        .upsert({
+          set_id: form.id,
+          user_verse_id: verse,
+        })
+        .eq("id", verse);
+
+      if (error) return { success: false, message: error.message };
+    }
+  }
+
+  revalidatePath("/", "layout");
   return { success: true };
 }
