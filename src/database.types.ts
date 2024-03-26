@@ -69,6 +69,7 @@ export type Database = {
           id: string;
           likes: number;
           public: boolean;
+          title: string;
         };
         Insert: {
           created_at?: string;
@@ -76,6 +77,7 @@ export type Database = {
           id?: string;
           likes?: number;
           public?: boolean;
+          title: string;
         };
         Update: {
           created_at?: string;
@@ -83,6 +85,7 @@ export type Database = {
           id?: string;
           likes?: number;
           public?: boolean;
+          title?: string;
         };
         Relationships: [
           {
