@@ -5,7 +5,7 @@ export const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
 
 export const createSetForm = z.object({
-  title: z.string().max(50),
+  title: z.string().min(1, "Title is required").max(50),
   public: z.preprocess((value) => value === "on", z.boolean()),
 });
 export type CreateSetForm = z.infer<typeof createSetForm>;

@@ -15,9 +15,10 @@ export default function CreateSetForm() {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
-  } = useForm<CreateSetForm>();
+  } = useForm<CreateSetForm>({
+    mode: "onChange",
+  });
   const [state, formAction] = useFormState(createSet, null);
   const user = useCurrentUser();
 
@@ -39,8 +40,7 @@ export default function CreateSetForm() {
   useEffect(() => {
     if (state?.success) {
       setTimeout(() => {
-        closeModal();
-        reset();
+        window.location.reload();
       }, 2000);
     }
   }, [closeModal, state]);
@@ -97,14 +97,14 @@ export default function CreateSetForm() {
           <div className="flex justify-center gap-2">
             <a
               onClick={closeModal}
-              className="flex items-center gap-1 bg-red-600 rounded-md px-4 py-2 text-black font-bold mb-2 hover:bg-red-700"
+              className="flex items-center gap-1 bg-red-600 text-white rounded-md px-4 py-2 font-bold mb-2 hover:bg-red-700"
             >
               <XMarkIcon className="h-5 w-5" />
               Cancel
             </a>
             <button
               type="submit"
-              className="flex items-center gap-1 bg-teal-500 rounded-md px-4 py-2 text-black font-bold mb-2 hover:bg-teal-600"
+              className="flex items-center gap-1 bg-teal-500 text-white rounded-md px-4 py-2 font-bold mb-2 hover:bg-teal-600"
             >
               <PlusIcon className="h-5 w-5" />
               Create
