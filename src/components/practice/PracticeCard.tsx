@@ -85,7 +85,8 @@ export default function PracticeCard({
     const randomIndexes = generateRandomIndexes(words.length);
     setRandomIndexes(randomIndexes);
     generateVerseWithInputs(words, randomIndexes);
-  }, [generateRandomIndexes, generateVerseWithInputs, verse]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const normalizeText = useCallback((text: string) => {
     return text

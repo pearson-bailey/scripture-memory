@@ -23,7 +23,7 @@ export default function Loading() {
       );
     };
     animateLoader();
-  }, []);
+  }, [animate, scope]);
 
   return (
     <div className="loadingContainer relative -skew-x-6 w-fit">
