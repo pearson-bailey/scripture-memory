@@ -8,7 +8,6 @@ import {
   BookOpenIcon,
   ChartBarIcon,
   Cog6ToothIcon,
-  MagnifyingGlassIcon,
   Square3Stack3DIcon,
   UserGroupIcon,
   UserPlusIcon,
@@ -51,11 +50,7 @@ const pages = [
   },
 ];
 
-export default function HeaderNav({
-  handleSearch,
-}: {
-  handleSearch: () => void;
-}) {
+export default function HeaderNav() {
   const currentPath = usePathname();
   const [selected, setSelected] = useState<string>(currentPath);
   const user = useCurrentUser();
@@ -66,11 +61,8 @@ export default function HeaderNav({
 
   return (
     <Listbox value={selected} onChange={setSelected}>
-      <div className="relative flex items-center justify-end w-36">
-        <button onClick={handleSearch}>
-          <MagnifyingGlassIcon className="w-7 h-7" />
-        </button>
-        <Listbox.Button className="relative flex cursor-pointer rounded-md py-2 px-4 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+      <div className="relative flex items-center justify-end">
+        <Listbox.Button className="flex cursor-pointer rounded-md py-2 px-4 text-left sm:text-sm">
           <Bars3Icon
             className="h-7 w-7 text-gray-300 hover:text-gray-200"
             aria-hidden="true"
@@ -83,7 +75,7 @@ export default function HeaderNav({
           leaveTo="opacity-0"
         >
           {user !== null ? (
-            <Listbox.Options className="absolute z-10 top-12 mt-1 max-h-64 w-full text-indigo-900 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+            <Listbox.Options className="absolute z-10 top-12 mt-1 max-h-64 w-fit text-indigo-900 overflow-auto rounded-md bg-white py-1 text-base sm:text-sm">
               {pages.map((page, pageIdx) => (
                 <Listbox.Option
                   key={pageIdx}

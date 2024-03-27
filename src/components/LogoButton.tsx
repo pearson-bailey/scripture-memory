@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function LogoButton() {
   return (
     <Link
-      className="py-2 px-3 flex items-center no-underline space-x-2"
+      className="py-2 px-3 flex flex-1 items-center no-underline space-x-2"
       href="/"
     >
       <img

@@ -67,7 +67,7 @@ export default function PracticeCard({
               type="text"
               defaultValue={userInputs[index]?.value || ""}
               onChange={(e) => handleInputChange(index, e.target.value)}
-              className={`w-36 text-black px-2 rounded-md ${userInputs[index]?.hasOwnProperty("isCorrect") ? (userInputs[index]?.isCorrect ? "" : "border-2 border-red-500") : ""}`}
+              className={`border w-36 text-black px-2 rounded-md ${userInputs[index]?.hasOwnProperty("isCorrect") ? (userInputs[index]?.isCorrect ? "border-foreground" : "border-2 border-red-500") : "border-foreground"}`}
             />
           );
         }

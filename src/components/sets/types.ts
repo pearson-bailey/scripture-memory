@@ -4,6 +4,8 @@ export type UserVerse = Tables<"user_verses"> & {
   verses: Tables<"verses"> | null;
 };
 
+export type NullableUserVerse = UserVerse | null;
+
 export type UserVersesSet = Tables<"user_verses_sets"> & {
   user_verses: UserVerse | null;
 };
