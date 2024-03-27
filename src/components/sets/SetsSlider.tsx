@@ -45,7 +45,7 @@ export default function SetsSlider() {
   };
 
   return sets.length > 0 ? (
-    <Slider {...settings}>
+    <Slider {...settings} className="max-w-[85vw] lg:max-w-full">
       {sets.map((set) => (
         <div key={set.id}>
           <SetCard set={set} />
