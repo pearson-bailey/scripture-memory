@@ -6,17 +6,21 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useState } from "react";
 import { Set } from "./types";
+import { Loading } from "@/src/components/ui";
 
 export default function SetsSlider() {
   const [sets, setSets] = useState<Set[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchSets = async () => {
       const setsData = await getUserSets();
       setSets(setsData);
     };
 
     fetchSets();
+    setIsLoading(false);
   }, []);
 
   const settings = {
@@ -44,7 +48,9 @@ export default function SetsSlider() {
     ],
   };
 
-  return sets.length > 0 ? (
+  return isLoading ? (
+    <Loading />
+  ) : sets.length > 0 ? (
     <Slider {...settings} className="max-w-[85vw] lg:max-w-full">
       {sets.map((set) => (
         <div key={set.id}>
