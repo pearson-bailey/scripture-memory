@@ -85,7 +85,7 @@ export default function PracticeCard({
     const randomIndexes = generateRandomIndexes(words.length);
     setRandomIndexes(randomIndexes);
     generateVerseWithInputs(words, randomIndexes);
-  }, [verse]);
+  }, [generateRandomIndexes, generateVerseWithInputs, verse]);
 
   const normalizeText = useCallback((text: string) => {
     return text
@@ -129,13 +129,7 @@ export default function PracticeCard({
         push("/verses");
       }, 3000);
     }
-  }, [
-    generateVerseWithInputs,
-    normalizeText,
-    randomIndexes,
-    userInputs,
-    verse,
-  ]);
+  }, [normalizeText, push, userInputs, verse]);
 
   useEffect(() => {
     if (!verse?.text) return;
@@ -152,7 +146,9 @@ export default function PracticeCard({
         <div className="text-xl">
           {formattedRef ?? verse?.reference}, {verse?.version}
         </div>
-        <div className="flex flex-wrap gap-1 text-lg">"{modifiedVerse}"</div>
+        <div className="flex flex-wrap gap-1 text-lg">
+          &quot;{modifiedVerse}&quot;
+        </div>
         {feedback?.message && (
           <div className={feedback.success ? "text-green-600" : "text-red-600"}>
             {feedback.message}

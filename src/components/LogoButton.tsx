@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function LogoButton() {
@@ -6,7 +7,7 @@ export default function LogoButton() {
       className="py-2 px-3 flex flex-1 items-center no-underline space-x-2"
       href="/"
     >
-      <img
+      <Image
         src="/scripture-memory-logo512.png"
         width={512}
         height={512}

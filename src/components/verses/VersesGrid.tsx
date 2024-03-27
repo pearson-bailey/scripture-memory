@@ -53,7 +53,7 @@ export default function Verses() {
     } else {
       getVerses();
     }
-  }, [selectedSet]);
+  }, [getVerses, getVersesBySet, selectedSet]);
 
   return (
     <>

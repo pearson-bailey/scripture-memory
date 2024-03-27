@@ -25,7 +25,7 @@ export default function SearchBar({
       setShowSearch(false);
       push(`/search?${searchParams.toString()}`);
     },
-    []
+    [push, setShowSearch]
   );
 
   useEffect(() => {

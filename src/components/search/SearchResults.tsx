@@ -63,7 +63,7 @@ export default function SearchResults({
     if (text && version) {
       submitForm(text, version);
     }
-  }, []);
+  }, [submitForm, text, version]);
 
   const handleEdit = useCallback(() => {
     setCanEdit(!canEdit);
@@ -80,7 +80,7 @@ export default function SearchResults({
         setEdited(true);
       }
     },
-    [edited, result]
+    [result]
   );
 
   const handleSubmit = useCallback(() => {

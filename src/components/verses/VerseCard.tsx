@@ -21,7 +21,7 @@ export default function VerseCard({ verse }: { verse: any | null }) {
           <div className="text-xl">
             {formattedRef}, {verse?.version}
           </div>
-          <p className="text-lg">"{verse?.text}"</p>
+          <p className="text-lg">&quot;{verse?.text}&quot;</p>
         </div>
         <div className="flex w-full">
           <Link

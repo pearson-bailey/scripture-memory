@@ -28,9 +28,12 @@ export default function RegisterForm({
 
   const [state, formAction] = useFormState(signUp, null);
 
-  const onSignUp = useCallback(async (values: RegisterForm) => {
-    return formAction(values);
-  }, []);
+  const onSignUp = useCallback(
+    async (values: RegisterForm) => {
+      return formAction(values);
+    },
+    [formAction]
+  );
 
   return (
     <form

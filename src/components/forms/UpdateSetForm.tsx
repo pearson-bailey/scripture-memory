@@ -48,7 +48,7 @@ export default function UpdateSetForm({ id }: { id: string }) {
 
       getUserVersesAsync();
     }
-  }, [id]);
+  }, [id, user]);
 
   const onUpdateSet = useCallback(
     (values: UpdateSetForm) => {
@@ -57,13 +57,13 @@ export default function UpdateSetForm({ id }: { id: string }) {
     [formAction]
   );
 
-  function closeModal() {
+  const closeModal = useCallback(() => {
     setIsOpen(false);
-  }
+  }, []);
 
-  function openModal() {
+  const openModal = useCallback(() => {
     setIsOpen(true);
-  }
+  }, []);
 
   useEffect(() => {
     if (state?.success) {

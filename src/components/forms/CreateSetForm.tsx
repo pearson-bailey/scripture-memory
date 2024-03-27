@@ -29,13 +29,13 @@ export default function CreateSetForm() {
     [formAction]
   );
 
-  function closeModal() {
+  const closeModal = useCallback(() => {
     setIsOpen(false);
-  }
+  }, []);
 
-  function openModal() {
+  const openModal = useCallback(() => {
     setIsOpen(true);
-  }
+  }, []);
 
   useEffect(() => {
     if (state?.success) {

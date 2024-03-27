@@ -77,7 +77,7 @@ export default function SearchForm({
 
       submitForm(requestString, version.abbrev);
     },
-    [book, chapter, verseEnd, verseStart, version]
+    [book, chapter, submitForm, verseEnd, verseStart, version]
   );
 
   return (
