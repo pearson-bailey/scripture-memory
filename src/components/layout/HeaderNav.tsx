@@ -81,7 +81,7 @@ export default function HeaderNav() {
                   key={pageIdx}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 px-4 ${
-                      active || selected.includes(page.href)
+                      active || selected?.includes(page.href)
                         ? "bg-indigo-100"
                         : null
                     }`
@@ -92,7 +92,7 @@ export default function HeaderNav() {
                   <Link href={page.href}>
                     <span
                       className={`flex gap-2 truncate ${
-                        selected.includes(page.href)
+                        selected?.includes(page.href)
                           ? "font-bold cursor-default"
                           : "font-semibold"
                       }`}
@@ -127,18 +127,18 @@ export default function HeaderNav() {
               <Listbox.Option
                 className={({ active }) =>
                   `relative cursor-default select-none py-2 px-4 ${
-                    active || selected.includes("/register")
+                    active || selected?.includes("/register")
                       ? "bg-indigo-100"
                       : null
                   }`
                 }
-                disabled={selected.includes("/register")}
+                disabled={selected?.includes("/register")}
                 value="register"
               >
                 <Link href="/register">
                   <span
                     className={`flex gap-2 truncate ${
-                      selected.includes("/register")
+                      selected?.includes("/register")
                         ? "font-bold cursor-default"
                         : "font-semibold"
                     }`}
@@ -152,18 +152,18 @@ export default function HeaderNav() {
               <Listbox.Option
                 className={({ active }) =>
                   `relative cursor-default select-none py-2 px-4 ${
-                    active || selected.includes("/login")
+                    active || selected?.includes("/login")
                       ? "bg-indigo-100"
                       : null
                   }`
                 }
-                disabled={selected.includes("/login")}
+                disabled={selected?.includes("/login")}
                 value="login"
               >
                 <Link href="/login">
                   <span
                     className={`flex gap-2 truncate ${
-                      selected.includes("/login")
+                      selected?.includes("/login")
                         ? "font-bold cursor-default"
                         : "font-semibold"
                     }`}

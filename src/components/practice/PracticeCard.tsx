@@ -60,7 +60,7 @@ export default function PracticeCard({
   const generateVerseWithInputs = useCallback(
     (words: string[], randomIndexes: number[]) => {
       const newVerse = words.map((word, index) => {
-        if (randomIndexes.includes(index)) {
+        if (randomIndexes?.includes(index)) {
           return (
             <input
               key={index}
