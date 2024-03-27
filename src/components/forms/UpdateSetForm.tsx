@@ -3,7 +3,7 @@ import { UpdateSetForm } from "./types";
 import { useForm } from "react-hook-form";
 import { useFormState } from "react-dom";
 import { useCallback, useEffect, useState } from "react";
-import { ErrorMessage, SuccessMessage } from "@/src/components/ui";
+import { ErrorMessage, Loading, SuccessMessage } from "@/src/components/ui";
 import { getSet, updateSet } from "./actions";
 import { useCurrentUser } from "../UserContext";
 import Modal from "../ui/Modal";
@@ -20,7 +20,7 @@ export default function UpdateSetForm({ id }: { id: string }) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isLoading, isSubmitting },
   } = useForm<UpdateSetForm>({
     mode: "onChange",
     defaultValues: {
@@ -140,22 +140,26 @@ export default function UpdateSetForm({ id }: { id: string }) {
           ) : state?.success === true ? (
             <SuccessMessage>{"Successfully updated!"}</SuccessMessage>
           ) : null}
-          <div className="flex justify-center gap-2">
-            <a
-              onClick={closeModal}
-              className="flex items-center gap-1 bg-red-600 text-white rounded-md px-4 py-2 font-bold mb-2 hover:bg-red-700 cursor-pointer"
-            >
-              <XMarkIcon className="h-5 w-5" />
-              Cancel
-            </a>
-            <button
-              type="submit"
-              className="flex items-center gap-1 bg-teal-500 text-white rounded-md px-4 py-2 font-bold mb-2 hover:bg-teal-600"
-            >
-              <PlusIcon className="h-5 w-5" />
-              Update
-            </button>
-          </div>
+          {isLoading || isSubmitting ? (
+            <Loading />
+          ) : (
+            <div className="flex justify-center gap-2">
+              <a
+                onClick={closeModal}
+                className="flex items-center gap-1 bg-red-600 text-white rounded-md px-4 py-2 font-bold mb-2 hover:bg-red-700 cursor-pointer"
+              >
+                <XMarkIcon className="h-5 w-5" />
+                Cancel
+              </a>
+              <button
+                type="submit"
+                className="flex items-center gap-1 bg-teal-500 text-white rounded-md px-4 py-2 font-bold mb-2 hover:bg-teal-600"
+              >
+                <PlusIcon className="h-5 w-5" />
+                Update
+              </button>
+            </div>
+          )}
         </form>
       </Modal>
     </>

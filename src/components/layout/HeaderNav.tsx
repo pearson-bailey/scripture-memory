@@ -63,10 +63,7 @@ export default function HeaderNav() {
     <Listbox value={selected} onChange={setSelected}>
       <div className="relative flex items-center justify-end">
         <Listbox.Button className="flex cursor-pointer rounded-md py-2 px-4 text-left sm:text-sm">
-          <Bars3Icon
-            className="h-7 w-7 text-gray-300 hover:text-gray-200"
-            aria-hidden="true"
-          />
+          <Bars3Icon className="h-7 w-7" aria-hidden="true" />
         </Listbox.Button>
         <Transition
           as={Fragment}

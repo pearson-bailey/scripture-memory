@@ -18,7 +18,7 @@ export default function Dropdown({
   return (
     <Listbox value={selected} onChange={setSelected}>
       <div className="relative flex items-center justify-end w-fit">
-        <Listbox.Button className="flex w-full justify-center cursor-pointer rounded-md py-2 px-4 text-left border sm:text-sm bg-indigo-900">
+        <Listbox.Button className="flex w-full justify-center cursor-pointer rounded-md py-2 px-4 text-left border sm:text-sm bg-indigo-900 text-white">
           {button ?? (
             <div className="flex items-center gap-2">
               {selected?.value}

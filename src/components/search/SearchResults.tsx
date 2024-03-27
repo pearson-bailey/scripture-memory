@@ -8,6 +8,7 @@ import { Verse } from "@/src/types";
 import { useCurrentUser } from "../UserContext";
 import { addUserVerse, quickPlay } from "../actions";
 import SearchForm from "../forms/SearchForm";
+import { Loading } from "@/src/components/ui";
 
 export default function SearchResults({
   text,
@@ -95,8 +96,6 @@ export default function SearchResults({
     }
   }, [edited, result]);
 
-  console.log(result);
-
   return (
     <div className="flex flex-col gap-2">
       <SearchForm
@@ -106,7 +105,9 @@ export default function SearchResults({
       />
       <span>
         {isLoading ? (
-          <p className="w-full text-center my-2">Loading...</p>
+          <span className="flex w-full justify-center">
+            <Loading />
+          </span>
         ) : result ? (
           <div>
             <div className="flex justify-end">
