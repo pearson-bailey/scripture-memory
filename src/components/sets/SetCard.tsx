@@ -10,7 +10,7 @@ export default function SetCard({ set }: { set: Set | null }) {
           <div className="w-full text-center text-xl mb-3 border-b border-teal-600">
             {set?.title}
           </div>
-          <div className="flex flex-col gap-1 mb-4">
+          <div className="flex flex-col h-36 gap-1 mb-4 overflow-y-auto rounded-md border px-2 py-1">
             {set?.user_verses_sets?.length ? (
               set.user_verses_sets.map((verse) => {
                 return (
